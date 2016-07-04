@@ -172,4 +172,42 @@ public class SqlHelper {
         System.out.println("Operation done successfully");
         return list;
     }
+    
+    public static String getColumnsName(String query) {
+        Connection c = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String strTemp = "";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:taxiservice.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened taxiservice successfully");
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            if (rs.next()) {
+                for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                    strTemp += metaData.getColumnName(i) + "&";
+                }
+
+            } else {
+                System.out.println("not exist record.");
+            }
+            rs.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        } finally {
+            try {
+                stmt.close();
+                c.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(SqlHelper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println("Operation done successfully");
+        return strTemp;
+    }
 }

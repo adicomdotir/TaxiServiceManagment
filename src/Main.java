@@ -115,6 +115,11 @@ public class Main extends javax.swing.JFrame {
         jMenu1.add(jMenu5);
 
         jMenuItem2.setText("مشاهده");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("حذف");
@@ -189,6 +194,11 @@ public class Main extends javax.swing.JFrame {
         AddServiceFrame s = new AddServiceFrame();
         s.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        InfoFrame info = new InfoFrame();
+        info.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
